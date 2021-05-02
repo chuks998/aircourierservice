@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirCourierService</title>
+</head>
+<body>
+    <!--This is the header section-->
+    <div style="height: 150px; width: auto; background-color: #f2f2f2; box-shadow: 1px 1px 5px #0000007e;">
+        <p style="font-size: 36px; font-family: 'Averia Libre'; color: #008080bd; text-shadow: 1px 1px 5px #ffffff; margin: 0 10px;">AirCourierService<br><p style="font-size: 13px; color: #008080; font-family: Arial; line-height: 0px; margin-left: 10px;">Tracker Website</p></p>
+        
+        <form class="input-group mb-3" action="{% url 'index_view'%}" method="get">
+            <input style="margin-left: 10px; height: 30px; width: 227px; border: none; border-radius: 20px; box-shadow: 1px 1px 5px #00000087;"  name="q" type="text" placeholder="Enter tracking number">
+            <button style="border: none; color: #169BD5; font-size: 13px;"  type="submit">Track</button>
+        </form>
+        
+        <div style="margin-top: 20px; height: 45px; width: auto;">
+            <li style="text-decoration: none; display: inline; padding: 0px; margin-left: 5px;">
+                <a style="font-family: Arial; font-size: 13px; color: #169BD5; padding: 0px; margin: 0 10px; text-decoration: none;" href="{% url 'about'%}">About Us</a>
+                <a style="font-family: Arial; font-size: 13px; color: #169BD5; padding: 0px; margin: 0 10px; text-decoration: none;" href="{% url 'contact'%}">Contact Us</a>
+            </li>
+        </div>
+    </div>
+    <!--This is the tracking number details design-->
+    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 0px 10px; padding: 0px;" >
+        {% for object in object_list %}
+            {% if object %}
+                <p style="text-align: center; margin: 10px 0px; padding: 10px 10px; font-size: 16; font-family: Arial; text-transform: uppercase;">Search result for {{ object.tracking_number }}</p>
+                {% if object.status %}
+                    <p style="margin: 0 10px; text-transform: capitalize; font-size: 12px; color: #169BD5; font-family: Arial;">delivery status: {{ object.status }}</p>
+                {% endif %}
+                <div style="background-color: #f2f2f2; width: auto; height: fit-content; margin: 0px 10px; padding:5px 0px;">
+                    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 10px 10px; padding: 0px;">
+                        <p style="margin: 10px 0px; padding: 10px 5px; font-size: 13px; font-family: Arial; text-transform: capitalize;">client name: {{ object.client_name }}</p>
+                    </div>
+                    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 10px 10px; padding: 0px;">
+                        <p style="margin: 10px 0px; padding: 10px 5px; font-size: 13px; font-family: Arial; text-transform: capitalize;">client email: {{ object.client_email }}</p>
+                    </div>
+                    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 10px 10px; padding: 0px;">
+                        <p style="margin: 10px 0px; padding: 10px 5px; font-size: 13px; font-family: Arial; text-transform: capitalize;">client phone: {{ object.client_phone }}</p>
+                    </div>
+                    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 10px 10px; padding: 0px;">
+                        <p style="margin: 10px 0px; padding: 10px 5px; font-size: 13px; font-family: Arial; text-transform: capitalize;">delivery address: {{ object.delivery_address }}</p>
+                    </div>
+                    <div style="background-color: #ffffff; width: auto; height: fit-content; margin: 10px 10px; padding: 0px;">
+                        <p style="margin: 10px 0px; padding: 10px 5px; font-size: 13px; font-family: Arial; text-transform: capitalize;">content: {{ object.content }}</p>
+                    </div>
+                    <p style="text-align: center; margin: 10px 0px; padding: 10px 10px; font-size: 16; font-family: Arial; text-transform: uppercase;">history of package shipment</p>
+                    <div style="height: auto; width: auto; border: 4px; border-color: #ffffff; background-color: #169cd59a; margin: 10px 10px; border-radius: 5px; padding-top: 1px; padding-bottom: 10px;">
+                        <div style="height: auto; width: auto; background-color: #f2f2f2c9; margin: 2px;">
+                            <p style="padding: 2px; margin-top: 0px; color: #111; font-size: 15px; font-family: Arial; text-align: center; text-transform: uppercase;">history: <p style="padding: 0px; margin: 0px; text-align: center; line-height: 15px; font-family: 'Libre Baskerville'; text-transform: capitalize; font-size: 14px;">{{ object.first_movement }}</p></p>
+                        </div>
+                        <div style="height: auto; width: auto; background-color: #f2f2f2c9; margin: 2px;">
+                            <p style="padding: 2px; margin-top: 0px; color: #111; font-size: 15px; font-family: Arial; text-align: center; text-transform: uppercase;">history: <p style="padding: 0px; margin: 0px; text-align: center; line-height: 15px; font-family: 'Libre Baskerville'; text-transform: capitalize; font-size: 14px;">{{ object.second_movement }}</p></p>
+                        </div>
+                        <div style="height: auto; width: auto; background-color: #f2f2f2c9; margin: 2px;">
+                            <p style="padding: 2px; margin-top: 0px; color: #111; font-size: 15px; font-family: Arial; text-align: center; text-transform: uppercase;">history: <p style="padding: 0px; margin: 0px; text-align: center; line-height: 15px; font-family: 'Libre Baskerville'; text-transform: capitalize; font-size: 14px;">{{ object.third_movement }}</p></p>
+                        </div>
+                        <div style="height: auto; width: auto; background-color: #f2f2f2c9; margin: 2px; margin-bottom: 10px;">
+                            <p style="padding: 2px; margin-top: 0px; color: #111; font-size: 15px; font-family: Arial; text-align: center; text-transform: uppercase;">history: <p style="padding: 0px; margin: 0px; text-align: center; line-height: 15px; font-family: 'Libre Baskerville'; text-transform: capitalize; font-size: 14px;">{{ object.fourth_movement }}</p></p>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+            {% else %}
+                <p>not found</p>
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+    <!-- info text section-->
+    <div style="background-color: rgba(189, 189, 15, 0.748); width: auto; height: auto; border-radius: 2px;">
+        <p style="margin: auto; padding: 5px; font-size: 14px; text-transform: capitalize; font-family: 'Arial';">this is only a tracking website. please enter your tracking number above to access information about your package.</p>
+    </div>
+    
+</body>
+</html>
+
+<!--
+    <h1>hello world {{ post.client_name }}</h1>
+    
+    <h1>hi</h1>
+    <a href="{% url 'item' %}">link</a>
+    
+-->
